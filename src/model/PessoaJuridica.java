@@ -2,18 +2,20 @@ package model;
 import java.io.Serializable;
 
 public class PessoaJuridica extends Pessoa implements Serializable{
-    String cnpj;
+    long cnpj;
 
-    public PessoaJuridica(int id, String texto, String cnpj) {
-        super(id, texto);
-        this.cnpj = cnpj;
-    }
 
-    public String getCnpj() {
+    public long getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(String cnpj) {
+    public void setCnpj(long cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public static void exibir(int id, String nome, long cnpj) {
+        System.out.println("Id: "+ id);
+        System.out.println("Nome: " + nome);
+        System.out.println("CPF: " + cnpj);
     }
 }

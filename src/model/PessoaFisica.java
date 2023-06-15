@@ -2,20 +2,14 @@ package model;
 import java.io.Serializable;
 
 public class PessoaFisica extends Pessoa implements Serializable{
-    String cpf;
+    long cpf;
     int idade;
 
-    public PessoaFisica(int id, String texto, String cpf, int idade) {
-        super(id, texto);
-        this.cpf = cpf;
-        this.idade = idade;
-    }
-
-    public String getCpf() {
+    public long getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(long cpf) {
         this.cpf = cpf;
     }
 
@@ -27,7 +21,10 @@ public class PessoaFisica extends Pessoa implements Serializable{
         this.idade = idade;
     }
 
-    public static void exibir () {
-
+    public static void exibir (int id, String nome, long cpf, int idade) {
+        System.out.println("Id: "+ id);
+        System.out.println("Nome: " + nome);
+        System.out.println("CPF: " + cpf);
+        System.out.println("Idade: " + idade);
     }
 }

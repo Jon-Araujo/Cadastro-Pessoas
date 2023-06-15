@@ -4,12 +4,7 @@ import java.io.Serializable;
 
 public class Pessoa implements Serializable{
     int id;
-    String texto;
-
-    public Pessoa(int id, String texto) {
-        this.id = id;
-        this.texto = texto;
-    }
+    String nome;
 
     public static void exibir() {
     }
@@ -21,11 +16,16 @@ public class Pessoa implements Serializable{
         this.id = id;
     }
 
-    public String getTexto() {
-        return texto;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setNome(String texto) {
+        this.nome = texto;
+    }
+
+    public static void msg(String tipo) {
+        System.out.println("Dados de Pessoa " + tipo + " Armazenados.");
+        System.out.println("Dados de Pessoa " + tipo + " Recuperados.");
     }
 }
