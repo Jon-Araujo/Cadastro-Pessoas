@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
     public static void main(String[] args) {
@@ -102,10 +103,33 @@ public class Main {
             }
         } else if (opcao == 2) {
             System.out.println("F - Pessoa Fisica | J - Pessoa Juridica");
-            String tipoPessoa = input.nextLine();
-            if (tipoPessoa == "F" || tipoPessoa == "f") {
+            String tipoPessoa = tipo.nextLine();
+            Scanner nome = new Scanner(System.in);
+            Scanner doc = new Scanner(System.in);
+            Scanner idade = new Scanner(System.in);
+            if (Objects.equals(tipoPessoa, "F") || Objects.equals(tipoPessoa, "f")) {
+                System.out.println("Selecione a pessoa que deseja alterar:");
+                for (int i = 0; i < pf.size(); i++) {
+                    System.out.println(i + " - " + pf.get(i)[1]);
+                }
+                Scanner altera = new Scanner(System.in);
+                int id = altera.nextInt();
 
-            } else if (tipoPessoa == "J" || tipoPessoa == "j") {
+                for (int i = 0; i < pf.size(); i++) {
+                    if (id == i) {
+                        System.out.println("Realize as alterações de " + pf.get(i)[1] + ":");
+                        String n = nome.nextLine();
+                        long cpf = doc.nextLong();
+                        int age = doc.nextInt();
+
+                        String[] lista = new String[]{n, String.valueOf(cpf), String.valueOf(age)};
+                        pf.add(i, lista);
+
+                        System.out.println(pf.get(i)[0] + pf.get(i)[1] + pf.get(i)[2]);
+                    }
+                }
+
+            } else if (Objects.equals(tipoPessoa, "J") || Objects.equals(tipoPessoa, "j")) {
 
             } else {
                 System.out.println("Opção Inválida. Selecione novamente!");
