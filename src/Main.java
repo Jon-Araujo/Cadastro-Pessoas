@@ -1,12 +1,13 @@
 import model.Pessoa;
 import model.PessoaFisica;
 import model.PessoaJuridica;
+import model.SalvaObjeto;
+import model.RecuperaObjeto;
 
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Main {
     public static void main(String[] args) {
@@ -120,37 +121,84 @@ public class Main {
                         System.out.println("Realize as alterações de " + pf.get(i)[1] + ":");
                         String n = nome.nextLine();
                         long cpf = doc.nextLong();
-                        int age = doc.nextInt();
+                        int age = idade.nextInt();
 
-                        String[] lista = new String[]{n, String.valueOf(cpf), String.valueOf(age)};
-                        pf.add(i, lista);
+                        String[] lista = new String[]{String.valueOf(i + 1), n, String.valueOf(cpf), String.valueOf(age)};
+                        pf.set(i, lista);
 
-                        System.out.println(pf.get(i)[0] + pf.get(i)[1] + pf.get(i)[2]);
+                        System.out.println("Nome:" + pf.get(i)[0] + "CPF:" + pf.get(i)[1] + "idade:" + pf.get(i)[2]);
                     }
                 }
+                for (int i = 0; i < pj.size(); i++) {
+                    System.out.println(Arrays.toString(pf.get(i)));
+                }
 
+            } else if (Objects.equals(tipoPessoa, "J") || Objects.equals(tipoPessoa, "j")) {
+                System.out.println("Selecione a empresa que deseja alterar:");
+                for (int i = 0; i < pj.size(); i++) {
+                    System.out.println(i + " - " + pj.get(i)[1]);
+                }
+                Scanner altera = new Scanner(System.in);
+                int id = altera.nextInt();
+
+                for (int i = 0; i < pj.size(); i++) {
+                    if (id == i) {
+                        System.out.println("Realize as alterações de " + pj.get(i)[1] + ":");
+                        String n = nome.nextLine();
+                        long cnpj = doc.nextLong();
+
+                        String[] lista = new String[]{String.valueOf(i + 1), n, String.valueOf(cnpj)};
+                        pj.set(i, lista);
+
+                        System.out.println("Id: " + pj.get(i)[0] + " Nome: " + pj.get(i)[1]  + " CNPJ: " + pj.get(i)[2]);
+                    }
+                }
+                for (int i = 0; i < pj.size(); i++) {
+                    System.out.println(Arrays.toString(pj.get(i)));
+                }
+            } else {
+                System.out.println("Opção Inválida. Selecione novamente!");
+            }
+        } else if (opcao == 3) {
+            Scanner idDeleta = new Scanner(System.in);
+            System.out.println("F - Pessoa Fisica | J - Pessoa Juridica");
+            String tipoPessoa = tipo.nextLine();
+            if (Objects.equals(tipoPessoa, "F") || Objects.equals(tipoPessoa, "f")) {
+                System.out.println("Selecione o usuário que deseja excluir:");
+                for (int i = 0; i < pf.size(); i++) {
+                    System.out.println(pf.get(i)[0] + " - " + pf.get(i)[1]);
+                }
+                String id = idDeleta.nextLine();
+                for (int i = 0; i < pf.size(); i++) {
+                    if (Objects.equals(id, pf.get(i)[0])) {
+                        pf.remove(pf.get(i));
+                    }
+                }
             } else if (Objects.equals(tipoPessoa, "J") || Objects.equals(tipoPessoa, "j")) {
 
             } else {
                 System.out.println("Opção Inválida. Selecione novamente!");
             }
-        } else if (opcao == 3) {
-            System.out.println("F - Pessoa Fisica | J - Pessoa Juridica");
-            String tipoPessoa = input.nextLine();
-            if (tipoPessoa == "F" || tipoPessoa == "f") {
-
-            } else if (tipoPessoa == "J" || tipoPessoa == "j") {
-
-            } else {
-                System.out.println("Opção Inválida. Selecione novamente!");
-            }
         } else if (opcao == 4) {
+            Scanner idUsuario = new Scanner(System.in);
             System.out.println("F - Pessoa Fisica | J - Pessoa Juridica");
-            String tipoPessoa = input.nextLine();
-            if (tipoPessoa == "F" || tipoPessoa == "f") {
-
-            } else if (tipoPessoa == "J" || tipoPessoa == "j") {
-
+            String tipoPessoa = tipo.nextLine();
+            if (Objects.equals(tipoPessoa, "F") || Objects.equals(tipoPessoa, "f")) {
+                System.out.println("Insira o Id para que seja verificado:");
+                String id = idUsuario.nextLine();
+                for (int i = 0; i < pf.size(); i++) {
+                    if (Objects.equals(id, pf.get(i)[0])) {
+                        System.out.println(Arrays.toString(pf.get(i)));
+                    }
+                }
+            } else if (Objects.equals(tipoPessoa, "J") || Objects.equals(tipoPessoa, "j")) {
+                System.out.println("Insira o Id para que seja verificado:");
+                String id = idUsuario.nextLine();
+                for (int i = 0; i < pj.size(); i++) {
+                    if (Objects.equals(id, pj.get(i)[0])) {
+                        System.out.println(Arrays.toString(pj.get(i)));
+                    }
+                }
             } else {
                 System.out.println("Opção Inválida. Selecione novamente!");
             }
@@ -170,10 +218,35 @@ public class Main {
             }
         } else if (opcao == 6) {
             System.out.println("F - Pessoa Fisica | J - Pessoa Juridica");
-            String tipoPessoa = input.nextLine();
-            if (tipoPessoa == "F" || tipoPessoa == "f") {
+            String tipoPessoa = tipo.nextLine();
+            if (Objects.equals(tipoPessoa, "F") || Objects.equals(tipoPessoa, "f")) {
+                SalvaObjeto.salvar(pf, "./dadosPf");
+            } else if (Objects.equals(tipoPessoa, "J") || Objects.equals(tipoPessoa, "j")) {
+                SalvaObjeto.salvar(pj, "./dadosPj");
+            } else {
+                System.out.println("Opção Inválida. Selecione novamente!");
+            }
+        } else if (opcao == 7) {
+            System.out.println("F - Pessoa Fisica | J - Pessoa Juridica");
+            String tipoPessoa = tipo.nextLine();
 
-            } else if (tipoPessoa == "J" || tipoPessoa == "j") {
+            if (Objects.equals(tipoPessoa, "F") || Objects.equals(tipoPessoa, "f")) {
+                ArrayList<String> recebeArray = new ArrayList<String>();
+//                String[] passaObjeto = {RecuperaObjeto.restaurar("./dadosPf").toString()};
+//                recebeArray = RecuperaObjeto.restaurar("./dadosPf").toString();
+//                String[] passaLista = (String[]) RecuperaObjeto.restaurar("./dadosPf");
+//                passaLista.add((String) RecuperaObjeto.restaurar("./dadosPf"));
+                var objeto = RecuperaObjeto.restaurar("./dadosPf");
+                System.out.println(objeto[0]);
+//                for (int i = 0; i < Object.objsize(objeto).length; i++) {
+//                    recebeArray.add((String) objeto[i]);
+//                    recebeArray = RecuperaObjeto.restaurar("./dadosPf")[i];
+//                    ArrayList <String> passaArray = new ArrayList<>();
+//                    passaArray = passaObjeto[0][i];
+//                    System.out.println(recebeArray.get(i));
+//                }
+            } else if (Objects.equals(tipoPessoa, "J") || Objects.equals(tipoPessoa, "j")) {
+                System.out.println(RecuperaObjeto.restaurar("./dadosPj"));
 
             } else {
                 System.out.println("Opção Inválida. Selecione novamente!");
