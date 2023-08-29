@@ -20,11 +20,4 @@ public class PessoaFisica extends Pessoa implements Serializable{
     public void setIdade(int idade) {
         this.idade = idade;
     }
-
-    public static void exibir (int id, String nome, long cpf, int idade) {
-        System.out.println("Id: "+ id);
-        System.out.println("Nome: " + nome);
-        System.out.println("CPF: " + cpf);
-        System.out.println("Idade: " + idade);
-    }
 }

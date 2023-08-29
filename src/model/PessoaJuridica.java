@@ -12,10 +12,4 @@ public class PessoaJuridica extends Pessoa implements Serializable{
     public void setCnpj(long cnpj) {
         this.cnpj = cnpj;
     }
-
-    public static void exibir(int id, String nome, long cnpj) {
-        System.out.println("Id: "+ id);
-        System.out.println("Nome: " + nome);
-        System.out.println("CPF: " + cnpj);
-    }
 }
