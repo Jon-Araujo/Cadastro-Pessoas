@@ -1,11 +1,5 @@
-import model.Pessoa;
-import model.PessoaFisica;
-import model.PessoaJuridica;
 import model.Metodos;
-
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
